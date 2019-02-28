@@ -126,7 +126,7 @@ class ApiController extends REST_Controller {
             $input['posting_date'] = $item->posting_date;
             $input['batch_no'] = $item->batch_no;
             $input['hutang_lapuk'] = $item->hutang_lapuk;
-            $input['tkh_batal'] = $item->tkh_batal;
+            $input['tkh_baucer'] = $item->tkh_baucer;
             $input['no_baucer'] = $item->no_baucer;
 
             $this->load->model('ApiModel');
