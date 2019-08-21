@@ -211,5 +211,21 @@ class ApiModel extends CI_Model{
         $this->db->close();
 
     	return $mgs;
-    }
+	}
+	
+	function checkRejectJournalDB($no_journal){
+        $this->db->select("NO_JOURNAL,TARIKH_JOURNAL,STATUS_PROSES");
+        $this->db->from('SKB.REJECT_JOURNAL');
+        $this->db->where("NO_JOURNAL","$no_journal");
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            $result = $query->result();
+        } else {
+            $result = "No Data";
+        }
+        $this->db->close();
+
+		return $result;
+	}
 }

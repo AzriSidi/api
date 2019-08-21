@@ -166,5 +166,11 @@ class ApiController extends REST_Controller {
             $data['message'] = $this->ApiModel->rejectJournalDB($input);
         }
         $this->response($data);
+	}
+	
+	function checkRejectJournal_get(){
+		$no_journal = $this->get('no_journal');
+        $data['rejectJournal'] = $this->ApiModel->checkRejectJournalDB($no_journal);
+        $this->response($data);
     }
 }
