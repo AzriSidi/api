@@ -175,7 +175,7 @@ class ApiModel extends CI_Model{
         $this->db->where("NO_AKAUN", $account_no);
         $query = $this->db->get();
 
-        $this->db->set('TKH_KEMASKINI',"to_char(sysdate,'DD/MON/YY')",FALSE);
+        $this->db->set('TKH_KEMASKINI',"to_date(sysdate,'dd/mm/yyyy')",FALSE);
         $this->db->set('FLAG_LAPUK', '1');
         $this->db->where('NO_AKAUN', $account_no);
 
@@ -192,5 +192,24 @@ class ApiModel extends CI_Model{
         $this->db->close();
 
         return $mgs;
+	}
+	
+	function rejectJournalDB($input){
+        $tkh_journal = $input['tkh_journal'];
+
+		$this->db->set('NO_JOURNAL', $input['no_journal']);
+		$this->db->set('TARIKH_JOURNAL',"to_date('$tkh_journal','dd/mm/yyyy')",FALSE);
+		$this->db->set('STATUS_PROSES', 'N');
+		$this->db->insert("SKB.REJECT_JOURNAL");
+		
+		if($this->db->affected_rows() > 0){
+			$mgs = "success";
+		}else{
+			$mgs = "no affected row";
+		}
+        
+        $this->db->close();
+
+    	return $mgs;
     }
 }

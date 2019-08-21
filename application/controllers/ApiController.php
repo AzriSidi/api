@@ -8,6 +8,12 @@ class ApiController extends REST_Controller {
 
     public function index(){
         echo "This is home controller";
+	}
+	
+	public function __construct(){
+            parent::__construct();
+			// Your own constructor code
+			$this->load->model('ApiModel');
     }
 
     function cekkembali_get() {
@@ -51,28 +57,24 @@ class ApiController extends REST_Controller {
     public function getKutipan_get() {
         $kod = $this->uri->segment('3');
         $tarikh = $this->uri->segment('5');
-        $this->load->model('ApiModel');
         $db['records'] = $this->ApiModel->kutipanDB($kod,$tarikh);
         $this->load->view('KutipanView',$db);
     }
 
     function getcekkembali_get(){
         $account_no = $this->get('account_no');
-        $this->load->model('ApiModel');
         $data['CEK_KEMBALI'] = $this->ApiModel->getcekDB($account_no);
         $this->response($data);
     }
 
     function getpulangbalik_get(){
         $account_no = $this->get('account_no');
-        $this->load->model('ApiModel');
         $data['PULANG_BALIK_HASIL'] = $this->ApiModel->getpulangDB($account_no);
         $this->response($data);
     }
 
     function getguaman_get(){
         $account_no = $this->get('account_no');
-        $this->load->model('ApiModel');
         $data['GUAMAN'] = $this->ApiModel->getguamDB($account_no);
         $this->response($data);
     }
@@ -99,8 +101,6 @@ class ApiController extends REST_Controller {
             $input['hutang_lapuk'] = $item->hutang_lapuk;
             $input['tkh_batal'] = $item->tkh_batal;
             $input['sebab_batal'] = $item->sebab_batal;
-
-            $this->load->model('ApiModel');
             $data['message'] = $this->ApiModel->CekDB($input);
         }
         $this->response($data);
@@ -128,8 +128,6 @@ class ApiController extends REST_Controller {
             $input['hutang_lapuk'] = $item->hutang_lapuk;
             $input['tkh_baucer'] = $item->tkh_baucer;
             $input['no_baucer'] = $item->no_baucer;
-
-            $this->load->model('ApiModel');
             $data['message'] = $this->ApiModel->pulangDB($input);
         }
         $this->response($data);
@@ -146,8 +144,6 @@ class ApiController extends REST_Controller {
             $input['desc_debit_credit'] = $item->desc_debit_credit;
             $input['amount'] = $item->amount;
             $input['posting_date'] = $item->posting_date;
-
-            $this->load->model('ApiModel');
             $data['message'] = $this->ApiModel->guamanDB($input);
         }
         $this->response($data);
@@ -157,8 +153,17 @@ class ApiController extends REST_Controller {
         $items = json_decode(json_encode($this->post()));
         foreach($items as $item){
             $account_no = $item->account_no;
-            $this->load->model('ApiModel');
             $data['message'] = $this->ApiModel->hutanglapukDB($account_no);
+        }
+        $this->response($data);
+	}
+	
+	function rejectJournal_post(){
+        $items = json_decode(json_encode($this->post()));
+        foreach($items as $item){
+			$input['no_journal'] = $item->no_journal;
+			$input['tkh_journal'] = $item->tkh_journal;
+            $data['message'] = $this->ApiModel->rejectJournalDB($input);
         }
         $this->response($data);
     }
