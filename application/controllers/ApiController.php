@@ -172,4 +172,36 @@ class ApiController extends REST_Controller {
         $data['rejectJournal'] = $this->ApiModel->checkRejectJournalDB($no_journal);
         $this->response($data);
     }
+	
+	function kutipBatal_post(){
+		$items = json_decode(json_encode($this->post()));
+        foreach($items as $item){
+			$input['account_no'] = $item->account_no;
+            $input['bill_no'] = $item->bill_no;
+            $input['resit_no'] = $item->resit_no;
+            $input['fiscal'] = $item->fiscal;
+            $input['transaction_date'] = $item->transaction_date;
+            $input['payment_method'] = $item->payment_method;
+            $input['ref_no'] = $item->ref_no;
+            $input['debit_credit'] = $item->debit_credit;
+            $input['transaction_code'] = $item->transaction_code;
+            $input['amount'] = $item->amount;
+            $input['vot'] = $item->vot;
+			$input['cost_centre'] = $item->cost_centre;
+			$input['posting_date'] = $item->posting_date;
+			$input['batch_no'] = $item->batch_no;
+            $input['tkh_batal'] = $item->tkh_batal;
+            $input['sebab_batal'] = $item->sebab_batal;
+            $input['status'] = $item->status;
+            $input['tkh_pinda'] = $item->tkh_pinda;
+			$input['transaction_type'] = $item->transaction_type;
+			$data['message'] = $this->ApiModel->kutipBatalDB($input);
+        }
+        $this->response($data);
+	}
+
+	function checkKutipBatal_get($no_journal){
+        $data['kutipan_batal'] = $this->ApiModel->checkKutipBatalDB($no_journal);
+        $this->response($data);
+    }
 }

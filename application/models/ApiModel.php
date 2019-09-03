@@ -195,13 +195,12 @@ class ApiModel extends CI_Model{
 	}
 	
 	function rejectJournalDB($input){
-        $tkh_journal = $input['tkh_journal'];
-
+		$tkh_journal = $input['tkh_journal'];
+		
 		$this->db->set('NO_JOURNAL', $input['no_journal']);
 		$this->db->set('TARIKH_JOURNAL',"to_date('$tkh_journal','dd/mm/yyyy')",FALSE);
-		$this->db->set('STATUS_PROSES', 'N');
+		$this->db->set('STATUS_PINDA', 'N');
 		$this->db->insert("SKB.REJECT_JOURNAL");
-		
 		if($this->db->affected_rows() > 0){
 			$mgs = "success";
 		}else{
@@ -209,14 +208,67 @@ class ApiModel extends CI_Model{
 		}
         
         $this->db->close();
-
     	return $mgs;
 	}
 	
 	function checkRejectJournalDB($no_journal){
-        $this->db->select("NO_JOURNAL,TARIKH_JOURNAL,STATUS_PROSES");
+        $this->db->select("NO_JOURNAL,TARIKH_JOURNAL,STATUS_PINDA");
         $this->db->from('SKB.REJECT_JOURNAL');
         $this->db->where("NO_JOURNAL","$no_journal");
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0){
+            $result = $query->result();
+        } else {
+            $result = "No Data";
+        }
+        $this->db->close();
+
+		return $result;
+	}
+
+	public function kutipBatalDB($input){
+        $fiscal = $input['fiscal'];
+		$transaction_date = $input['transaction_date'];
+		$posting_date = $input['posting_date'];
+		$tkh_batal = $input['tkh_batal'];
+		$tkh_pinda = $input['tkh_pinda'];
+
+		$this->db->set('ACCOUNT_NO', $input['account_no']);
+		$this->db->set('BILL_NO', $input['bill_no']);
+		$this->db->set('RESIT_NO', $input['resit_no']);
+		$this->db->set('FISCAL', "to_date('$fiscal','dd/mm/yyyy')",FALSE);
+		$this->db->set('TRANSACTION_DATE',"to_date('$transaction_date','dd/mm/yyyy')",FALSE);
+		$this->db->set('PAYMENT_METHOD', $input['payment_method']);
+		$this->db->set('REF_NO', $input['ref_no']);
+		$this->db->set('DEBIT_CREDIT', $input['debit_credit']);
+		$this->db->set('TRANSACTION_CODE', $input['transaction_code']);
+		$this->db->set('AMOUNT', $input['amount']);
+		$this->db->set('VOT', $input['vot']);
+		$this->db->set('COST_CENTRE', $input['cost_centre']);
+		$this->db->set('POSTING_DATE',"to_date('$posting_date','dd/mm/yyyy')",FALSE);
+		$this->db->set('BATCH_NO', $input['batch_no']);
+		$this->db->set('TKH_BATAL',"to_date('$tkh_batal','dd/mm/yyyy')",FALSE);
+		$this->db->set('SEBAB_BATAL', $input['sebab_batal']);
+		$this->db->set('STATUS', $input['status']);
+		$this->db->set('TKH_PINDA', "to_date('$tkh_pinda','dd/mm/yyyy')",FALSE);
+		$this->db->set('TRANSACTION_TYPE', $input['transaction_type']);
+        $this->db->insert("SKB.KUTIPAN_BATAL");
+
+        if($this->db->affected_rows() > 0){
+            $mgs = "success";
+        }else{
+            $mgs = "no affected row";
+        }
+        $this->db->close();
+
+    	return $mgs;
+	}
+
+	function checkKutipBatalDB($no_journal){
+        $this->db->select("*");
+        $this->db->from('SKB.KUTIPAN_BATAL');
+        $this->db->where("ACCOUNT_NO","$no_journal");
         $query = $this->db->get();
 
         if($query->num_rows() > 0){

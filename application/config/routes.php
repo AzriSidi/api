@@ -61,4 +61,6 @@ $route['getcekkembali'] = 'apicontroller/getcekkembali';
 $route['getpulangbalik'] = 'apicontroller/getpulangbalik';
 $route['getguaman'] = 'apicontroller/getguaman';
 $route['rejectjournal'] = 'apicontroller/rejectJournal';
-$route['checkRejectJournal/(:any)'] = 'apicontroller/checkRejectJournal/$1';
+$route['rejectjournal/(:any)'] = 'apicontroller/checkRejectJournal/$1';
+$route['kutipanbatal'] = 'apicontroller/kutipBatal';
+$route['kutipanbatal/(:any)'] = 'apicontroller/checkKutipBatal/$1';
