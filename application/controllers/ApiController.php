@@ -61,8 +61,7 @@ class ApiController extends REST_Controller {
         $this->load->view('KutipanView',$db);
     }
 
-    function getcekkembali_get(){
-        $account_no = $this->get('account_no');
+    function getcekkembali_get($account_no){
         $data['CEK_KEMBALI'] = $this->ApiModel->getcekDB($account_no);
         $this->response($data);
     }
@@ -100,7 +99,10 @@ class ApiController extends REST_Controller {
             $input['batch_no'] = $item->batch_no;
             $input['hutang_lapuk'] = $item->hutang_lapuk;
             $input['tkh_batal'] = $item->tkh_batal;
-            $input['sebab_batal'] = $item->sebab_batal;
+			$input['sebab_batal'] = $item->sebab_batal;
+			$input['payer_name'] = $item->payer_name;
+			$input['phone_no'] = $item->phone_no;
+			$input['transaction_type'] = $item->transaction_type;
             $data['message'] = $this->ApiModel->CekDB($input);
         }
         $this->response($data);
@@ -127,7 +129,13 @@ class ApiController extends REST_Controller {
             $input['batch_no'] = $item->batch_no;
             $input['hutang_lapuk'] = $item->hutang_lapuk;
             $input['tkh_baucer'] = $item->tkh_baucer;
-            $input['no_baucer'] = $item->no_baucer;
+			$input['no_baucer'] = $item->no_baucer;
+			$input['bank_name'] = $item->bank_name;
+			$input['refund_date'] = $item->refund_date;
+			$input['payer_name'] = $item->payer_name;
+			$input['phone_no'] = $item->phone_no;
+			$input['reason'] = $item->reason;
+			$input['transaction_type'] = $item->transaction_type;
             $data['message'] = $this->ApiModel->pulangDB($input);
         }
         $this->response($data);

@@ -95,6 +95,9 @@ class ApiModel extends CI_Model{
 		$this->db->set('HUTANG_LAPUK', $input['hutang_lapuk']);
 		$this->db->set('TKH_BATAL',"to_date('$tkh_batal','dd/mm/yyyy')",FALSE);
 		$this->db->set('SEBAB_BATAL', $input['sebab_batal']);
+		$this->db->set('PAYER_NAME' ,$input['payer_name']);
+		$this->db->set('PHONE_NO', $input['phone_no']);
+		$this->db->set('TRANSACTION_TYPE', $input['transaction_type']);
 		$this->db->insert("SKB.CEK_KEMBALI");
 
 		if($this->db->affected_rows() > 0){
@@ -112,6 +115,7 @@ class ApiModel extends CI_Model{
 		$transaction_date = $input['transaction_date'];
 		$posting_date = $input['posting_date'];
 		$tkh_baucer = $input['tkh_baucer'];
+		$refund_date = $input['refund_date'];
 
 		$this->db->set('ACCOUNT_NO', $input['account_no']);
 		$this->db->set('BILL_NO', $input['bill_no']);
@@ -132,6 +136,12 @@ class ApiModel extends CI_Model{
 		$this->db->set('HUTANG_LAPUK', $input['hutang_lapuk']);
 		$this->db->set('TKH_BAUCER',"to_date('$tkh_baucer','dd/mm/yyyy')",FALSE);
 		$this->db->set('NO_BAUCER', $input['no_baucer']);
+		$this->db->set('BANK_NAME', $input['bank_name']);
+		$this->db->set('REFUND_DATE', "to_date('$refund_date','dd/mm/yyyy')",FALSE);
+		$this->db->set('PAYER_NAME', $input['payer_name']);
+		$this->db->set('PHONE_NO', $input['phone_no']);
+		$this->db->set('REASON', $input['reason']);
+		$this->db->set('TRANSACTION_TYPE', $input['transaction_type']);
         $this->db->insert("SKB.PULANGBALIK_HASIL");
 
         if($this->db->affected_rows() > 0){
