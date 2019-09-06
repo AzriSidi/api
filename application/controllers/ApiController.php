@@ -66,14 +66,12 @@ class ApiController extends REST_Controller {
         $this->response($data);
     }
 
-    function getpulangbalik_get(){
-        $account_no = $this->get('account_no');
+    function getpulangbalik_get($account_no){
         $data['PULANG_BALIK_HASIL'] = $this->ApiModel->getpulangDB($account_no);
         $this->response($data);
     }
 
-    function getguaman_get(){
-        $account_no = $this->get('account_no');
+    function getguaman_get($account_no){
         $data['GUAMAN'] = $this->ApiModel->getguamDB($account_no);
         $this->response($data);
     }
