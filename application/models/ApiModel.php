@@ -242,7 +242,6 @@ class ApiModel extends CI_Model{
 		$transaction_date = $input['transaction_date'];
 		$posting_date = $input['posting_date'];
 		$tkh_batal = $input['tkh_batal'];
-		$tkh_pinda = $input['tkh_pinda'];
 
 		$this->db->set('ACCOUNT_NO', $input['account_no']);
 		$this->db->set('BILL_NO', $input['bill_no']);
@@ -260,8 +259,6 @@ class ApiModel extends CI_Model{
 		$this->db->set('BATCH_NO', $input['batch_no']);
 		$this->db->set('TKH_BATAL',"to_date('$tkh_batal','dd/mm/yyyy')",FALSE);
 		$this->db->set('SEBAB_BATAL', $input['sebab_batal']);
-		$this->db->set('STATUS', $input['status']);
-		$this->db->set('TKH_PINDA', "to_date('$tkh_pinda','dd/mm/yyyy')",FALSE);
 		$this->db->set('TRANSACTION_TYPE', $input['transaction_type']);
         $this->db->insert("SKB.KUTIPAN_BATAL");
 
