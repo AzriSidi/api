@@ -207,5 +207,21 @@ class ApiController extends REST_Controller {
 	function checkKutipBatal_get($no_journal){
         $data['kutipan_batal'] = $this->ApiModel->checkKutipBatalDB($no_journal);
         $this->response($data);
-    }
+	}
+	
+	function updatePayCukai_post(){
+        $items = json_decode(json_encode($this->post()));
+        foreach($items as $item){
+			$input['no_akaun'] = $item->no_akaun;
+			$input['tkh_bayar'] = $item->tkh_bayar;
+			$input['stesyen'] = $item->stesyen;
+			$input['kategori'] = $item->kategori;
+			$input['amaun'] = $item->amaun;
+			$input['jenis_bayar'] = $item->jenis_bayar;
+			$input['no_resit'] = $item->no_resit;
+			$input['status'] = $item->status;
+            $data['message'] = $this->ApiModel->updatePayCukaiDB($input);
+        }
+    	$this->response($data);
+	}
 }
