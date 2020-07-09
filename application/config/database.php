@@ -74,7 +74,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> 'mpk_cloud',//mpklang
+	'dsn'	=> 'mpk',//mpklang
 	'hostname' => '',
 	'username' => 'majlis',
 	'password' => 'majlis',
