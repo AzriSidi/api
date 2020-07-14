@@ -260,6 +260,8 @@ class ApiModel extends CI_Model{
 		$this->db->set('TKH_BATAL',"to_date('$tkh_batal','dd/mm/yyyy')",FALSE);
 		$this->db->set('SEBAB_BATAL', $input['sebab_batal']);
 		$this->db->set('TRANSACTION_TYPE', $input['transaction_type']);
+		$this->db->set('FLAG_BATAL', $input['flag_batal']);
+		$this->db->set('BANK_CODE', $input['bank_code']);
         $this->db->insert("SKB.KUTIPAN_BATAL");
 
         if($this->db->affected_rows() > 0){

@@ -198,7 +198,9 @@ class ApiController extends REST_Controller {
 			$input['batch_no'] = $item->batch_no;
             $input['tkh_batal'] = $item->tkh_batal;
             $input['sebab_batal'] = $item->sebab_batal;
-			$input['transaction_type'] = $item->transaction_type;
+            $input['transaction_type'] = $item->transaction_type;
+            $input['flag_batal'] = $item->flag_batal;
+            $input['bank_code'] = $item->bank_code;
 			$data['message'] = $this->ApiModel->kutipBatalDB($input);
         }
         $this->response($data);
