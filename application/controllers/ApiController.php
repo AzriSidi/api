@@ -212,7 +212,7 @@ class ApiController extends REST_Controller {
 	}
 	
 	function updatePayCukai_post(){
-        $items = json_decode(json_encode($this->post()));
+		$items = json_decode(json_encode($this->post()));
         foreach($items as $item){
 			$input['no_akaun'] = $item->no_akaun;
 			$input['tkh_bayar'] = $item->tkh_bayar;
