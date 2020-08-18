@@ -237,7 +237,8 @@ class ApiController extends REST_Controller {
 			$input['amaun'] = $item->amaun;
 			$input['jenis_bayar'] = $item->jenis_bayar;
 			$input['no_resit'] = $item->no_resit;
-			$input['status'] = $item->status;
+            $input['status'] = $item->status;
+            $input['id_no'] = $item->id_no;
             $data['message'] = $this->ApiModel->updateKontraDB($input);
         }
     	$this->response($data);

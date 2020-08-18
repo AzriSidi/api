@@ -326,6 +326,7 @@ class ApiModel extends CI_Model{
 					->set('JENIS_BAYAR', $input['jenis_bayar'])
 					->set('NO_RESIT', $input['no_resit'])
 					->set('STATUS', $input['status'])
+					->set('ID_NO', $input['id_no'])
 					->insert("SKB.KONTRA");
 			$mgs = "success";
 		}else{
