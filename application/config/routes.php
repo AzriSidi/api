@@ -65,3 +65,4 @@ $route['rejectjournal/(:any)'] = 'apicontroller/checkRejectJournal/$1';
 $route['kutipanbatal'] = 'apicontroller/kutipBatal';
 $route['kutipanbatal/(:any)'] = 'apicontroller/checkKutipBatal/$1';
 $route['updatePayCukai'] = 'apicontroller/updatePayCukai';
+$route['updateKontra'] = 'apicontroller/updateKontra';

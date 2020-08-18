@@ -290,23 +290,46 @@ class ApiModel extends CI_Model{
 		return $result;
 	}
 
-	function updatePayCukaiDB($input){		
-		$tkh_bayar = $input['tkh_bayar'];
+	function updatePayCukaiDB($input){	
+		$checkInput = in_array("", $input, true);
+		if(!$checkInput){	
+			$tkh_bayar = $input['tkh_bayar'];
 
-		$this->db->set('NO_AKAUN', $input['no_akaun'])
-				  ->set('TKH_BAYAR',"to_date('$tkh_bayar','YYYY-MM-DD HH24:MI:SS')",FALSE)
-				  ->set('STESYEN', $input['stesyen'])
-				  ->set('KATEGORI', $input['kategori'])
-				  ->set('AMAUN_BAYAR', $input['amaun'])
-		 		  ->set('JENIS_BAYAR', $input['jenis_bayar'])
-				  ->set('NO_RESIT', $input['no_resit'])
-				  ->set('STATUS', $input['status'])
-				  ->insert("SUBSISTEM.OUTPUT_STAGING_TABLE");
-				  
-		if($this->db->affected_rows() > 0){
+			$this->db->set('NO_AKAUN', $input['no_akaun'])
+					->set('TKH_BAYAR',"to_date('$tkh_bayar','YYYY-MM-DD HH24:MI:SS')",FALSE)
+					->set('STESYEN', $input['stesyen'])
+					->set('KATEGORI', $input['kategori'])
+					->set('AMAUN_BAYAR', $input['amaun'])
+					->set('JENIS_BAYAR', $input['jenis_bayar'])
+					->set('NO_RESIT', $input['no_resit'])
+					->set('STATUS', $input['status'])
+					->insert("SUBSISTEM.OUTPUT_STAGING_TABLE");
 			$mgs = "success";
 		}else{
-			$mgs = "no affected row";
+			$mgs = "fail";
+		}
+        
+        $this->db->close();
+    	return $mgs;
+	}
+
+	function updateKontraDB($input){	
+		$checkInput = in_array("", $input, true);
+		if(!$checkInput){	
+			$tkh_bayar = $input['tkh_bayar'];
+
+			$this->db->set('NO_AKAUN', $input['no_akaun'])
+					->set('TKH_BAYAR',"to_date('$tkh_bayar','YYYY-MM-DD HH24:MI:SS')",FALSE)
+					->set('STESYEN', $input['stesyen'])
+					->set('KATEGORI', $input['kategori'])
+					->set('AMAUN_BAYAR', $input['amaun'])
+					->set('JENIS_BAYAR', $input['jenis_bayar'])
+					->set('NO_RESIT', $input['no_resit'])
+					->set('STATUS', $input['status'])
+					->insert("SKB.KONTRA");
+			$mgs = "success";
+		}else{
+			$mgs = "fail";
 		}
         
         $this->db->close();
