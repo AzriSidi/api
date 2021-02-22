@@ -98,6 +98,7 @@ class ApiModel extends CI_Model{
 		$this->db->set('PAYER_NAME' ,$input['payer_name']);
 		$this->db->set('PHONE_NO', $input['phone_no']);
 		$this->db->set('TRANSACTION_TYPE', $input['transaction_type']);
+		$this->db->set('SUB_AKAUN', $input['sub_akaun']);
 		$this->db->insert("SKB.CEK_KEMBALI");
 
 		if($this->db->affected_rows() > 0){
@@ -142,6 +143,7 @@ class ApiModel extends CI_Model{
 		$this->db->set('PHONE_NO', $input['phone_no']);
 		$this->db->set('REASON', $input['reason']);
 		$this->db->set('TRANSACTION_TYPE', $input['transaction_type']);
+		$this->db->set('SUB_AKAUN', $input['sub_akaun']);
         $this->db->insert("SKB.PULANGBALIK_HASIL");
 
         if($this->db->affected_rows() > 0){

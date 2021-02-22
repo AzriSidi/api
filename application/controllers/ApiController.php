@@ -101,6 +101,7 @@ class ApiController extends REST_Controller {
 			$input['payer_name'] = $item->payer_name;
 			$input['phone_no'] = $item->phone_no;
 			$input['transaction_type'] = $item->transaction_type;
+            $input['sub_akaun'] = $item->sub_akaun;
             $data['message'] = $this->ApiModel->CekDB($input);
         }
         $this->response($data);
@@ -134,6 +135,7 @@ class ApiController extends REST_Controller {
 			$input['phone_no'] = $item->phone_no;
 			$input['reason'] = $item->reason;
 			$input['transaction_type'] = $item->transaction_type;
+            $input['sub_akaun'] = $item->sub_akaun;
             $data['message'] = $this->ApiModel->pulangDB($input);
         }
         $this->response($data);
