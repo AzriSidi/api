@@ -338,4 +338,25 @@ class ApiModel extends CI_Model{
         $this->db->close();
     	return $mgs;
 	}
+
+	function ipayDataDB($input){	
+		$checkInput = in_array("", $input, true);
+		if(!$checkInput){	
+			$tarikh = $input['tarikh'];
+
+			$this->db->set('NO_AKAUN', $input['no_akaun'])
+					->set('KP', $input['kp'])
+					->set('NO_PHONE', $input['no_phone'])
+					->set('EMAIL', $input['email'])
+					->set('TARIKH',"to_date('$tarikh','YYYY-MM-DD HH24:MI:SS')",FALSE)
+					->set('STATUS', $input['status'])
+					->insert("SUBSISTEM.IPAY_DATA");
+			$mgs = "success";
+		}else{
+			$mgs = "fail";
+		}
+        
+        $this->db->close();
+    	return $mgs;
+	}
 }

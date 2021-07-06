@@ -245,4 +245,18 @@ class ApiController extends REST_Controller {
         }
     	$this->response($data);
 	}
+
+	function ipayData_post(){
+		$items = json_decode(json_encode($this->post()));
+        foreach($items as $item){
+			$input['no_akaun'] = $item->no_akaun;
+			$input['kp'] = $item->kp;
+			$input['no_phone'] = $item->no_phone;
+			$input['email'] = $item->email;
+			$input['tarikh'] = $item->tarikh;
+            $input['status'] = $item->status;
+            $data['message'] = $this->ApiModel->ipayDataDB($input);
+        }
+    	$this->response($data);
+	}	
 }
